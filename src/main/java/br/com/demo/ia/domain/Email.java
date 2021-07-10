@@ -30,11 +30,11 @@ public final class Email {
 	
 	@ManyToOne
 	@JoinColumn(name = "USER_ID", nullable = false, updatable = false)
-	private final Long userFrom;
+	private final User userFrom;
 	
 	@ManyToOne
 	@JoinColumn(name = "USER_ID", nullable = false, updatable = false)
-	private final Long userTo;
+	private final User userTo;
 	
 	@Column(nullable = false, updatable = false)
 	private final String subject;

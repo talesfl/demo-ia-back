@@ -1,5 +1,7 @@
 package br.com.demo.ia.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.demo.ia.domain.Email;
@@ -28,8 +30,18 @@ class EmailServiceImpl implements EmailService {
 	}
 	
 	@Override
+	public Email findById(Long id) {
+		return emailRepository.findById(id).orElseThrow();
+	}
+	
+	@Override
 	public void dispatchEmail(Email email) {
 		emailSentEventDispatcher.send(new EmailSentEvent(email));
 	}
-	
+
+	@Override
+	public Page<Email> findByUserFromId(Long id, Pageable pageable) {
+		return emailRepository.findByUserFromId(id, pageable);
+	}
+
 }
