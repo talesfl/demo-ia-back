@@ -19,7 +19,7 @@ class EmailController {
 		this.emailService = emailService;
 	}
 	
-	@PostMapping("email")
+	@PostMapping
 	public ResponseEntity<Void> dispatchEmail(@RequestBody final Email email) {
 		Email entity = emailService.save(email);
 		emailService.dispatchEmail(entity);
