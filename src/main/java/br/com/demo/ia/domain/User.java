@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class User {
+public final class User {
 	
 	@Id
 	@GeneratedValue
@@ -66,22 +66,6 @@ public class User {
 		this.admin = admin;
 	}
 	
-	public User(
-			Long id,
-			String name, 
-			String login, 
-			String password, 
-			String email, 
-			Boolean admin
-	) {
-		this.id = id;
-		this.name = name;
-		this.login = login;
-		this.password = password;
-		this.updateDate = LocalDateTime.now();
-		this.email = email;
-		this.admin = admin;
-	}
 	
 	public User(
 			Long id,
@@ -94,6 +78,19 @@ public class User {
 		this.login = login;
 		this.updateDate = LocalDateTime.now();
 		this.email = email;
+	}
+	
+	public User(
+			Long id,
+			String name, 
+			String login, 
+			String password, 
+			String email, 
+			Boolean admin
+	) {
+		this(id, name, login, email);
+		this.password = password;
+		this.admin = admin;
 	}
 
 }
