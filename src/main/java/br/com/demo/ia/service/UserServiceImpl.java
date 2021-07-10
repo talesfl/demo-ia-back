@@ -4,25 +4,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.demo.ia.domain.Email;
 import br.com.demo.ia.domain.User;
-import br.com.demo.ia.event.EmailSentEvent;
-import br.com.demo.ia.event.EmailSentEventDispatcher;
 import br.com.demo.ia.repository.UserRepository;
 
 @Service
 class UserServiceImpl implements UserService {
 	
 	private UserRepository userRepository;
-	
-	private EmailSentEventDispatcher emailSentEventDispatcher;
 
-	public UserServiceImpl(
-			final UserRepository userRepository,
-			final EmailSentEventDispatcher emailSentEventDispatcher
-	) {
+	public UserServiceImpl(final UserRepository userRepository) {
 		this.userRepository = userRepository;
-		this.emailSentEventDispatcher = emailSentEventDispatcher;
 	}
 
 	@Override
@@ -64,11 +55,6 @@ class UserServiceImpl implements UserService {
 	@Override
 	public User findById(Long id) {
 		return userRepository.findById(id).orElseThrow();
-	}
-
-	@Override
-	public void dispatchEmail(Email email) {
-		emailSentEventDispatcher.send(new EmailSentEvent(email));
 	}
 	
 }

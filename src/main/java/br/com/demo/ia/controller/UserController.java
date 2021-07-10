@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.demo.ia.domain.Email;
 import br.com.demo.ia.domain.User;
 import br.com.demo.ia.service.UserService;
 
@@ -57,10 +56,5 @@ class UserController {
 		Page<User> page = userService.findByNameStartingWith(name, PageRequest.of(pageNumber, pageSize));
 		return ResponseEntity.ok(page);
 	}
-	
-	@PostMapping("email")
-	public ResponseEntity<Void> dispatchEmail(@RequestBody final Email email) {
-		userService.dispatchEmail(email);
-		return ResponseEntity.noContent().build();
-	}
+
 }
