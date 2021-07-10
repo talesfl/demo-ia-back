@@ -11,10 +11,9 @@ public interface UserService {
 	
 	User update(User entity);
 	
+	User findById(Long id);
+
 	void deleteById(Long id);
 	
 	Page<User> findByNameStartingWith(String name, Pageable pageable);
-
-	User findById(Long id);
-
 }
