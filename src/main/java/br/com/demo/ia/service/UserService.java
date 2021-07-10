@@ -3,6 +3,7 @@ package br.com.demo.ia.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import br.com.demo.ia.domain.Email;
 import br.com.demo.ia.domain.User;
 
 public interface UserService {
@@ -16,6 +17,7 @@ public interface UserService {
 	Page<User> findByNameStartingWith(String name, Pageable pageable);
 
 	User findById(Long id);
-
+	
+	void dispatchEmail(Email email);
 
 }
