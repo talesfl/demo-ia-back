@@ -29,11 +29,11 @@ public final class Email {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "USER_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "USER_FROM_ID", nullable = false, updatable = false)
 	private final User userFrom;
 	
 	@ManyToOne
-	@JoinColumn(name = "USER_ID", nullable = false, updatable = false)
+	@JoinColumn(name = "USER_TO_ID", nullable = false, updatable = false)
 	private final User userTo;
 	
 	@Column(nullable = false, updatable = false)
