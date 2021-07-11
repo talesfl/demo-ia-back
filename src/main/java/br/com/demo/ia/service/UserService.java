@@ -16,4 +16,7 @@ public interface UserService {
 	void deleteById(Long id);
 	
 	Page<User> findByNameStartingWith(String name, Pageable pageable);
+	
+	Page<User> findByEmailStartingWith(String name, Pageable pageable);
+	
 }

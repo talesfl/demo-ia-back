@@ -56,5 +56,10 @@ class UserServiceImpl implements UserService {
 	public User findById(Long id) {
 		return userRepository.findById(id).orElseThrow();
 	}
+
+	@Override
+	public Page<User> findByEmailStartingWith(String name, Pageable pageable) {
+		return userRepository.findByEmailStartingWith(name, pageable);
+	}
 	
 }

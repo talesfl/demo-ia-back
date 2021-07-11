@@ -10,4 +10,6 @@ import br.com.demo.ia.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Page<User> findByNameStartingWith(@Param("name") final String name, final Pageable pageable);
+	
+	Page<User> findByEmailStartingWith(@Param("email") final String email, final Pageable pageable);
 }

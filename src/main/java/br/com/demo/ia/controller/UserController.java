@@ -47,13 +47,23 @@ class UserController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@GetMapping
+	@GetMapping("name")
 	public ResponseEntity<Page<User>> findByNameStartingWith(
 			@RequestParam final String name,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
 	) {
 		Page<User> page = userService.findByNameStartingWith(name, PageRequest.of(pageNumber, pageSize));
+		return ResponseEntity.ok(page);
+	}
+	
+	@GetMapping("email")
+	public ResponseEntity<Page<User>> findByEmailStartingWith(
+			@RequestParam final String email,
+			@RequestParam final int pageNumber, 
+			@RequestParam final int pageSize
+	) {
+		Page<User> page = userService.findByEmailStartingWith(email, PageRequest.of(pageNumber, pageSize));
 		return ResponseEntity.ok(page);
 	}
 
