@@ -2,6 +2,8 @@ package br.com.demo.ia.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.demo.ia.domain.User;
@@ -10,7 +12,7 @@ import br.com.demo.ia.repository.UserRepository;
 @Service
 class UserServiceImpl implements UserService {
 	
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	public UserServiceImpl(final UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -61,5 +63,11 @@ class UserServiceImpl implements UserService {
 	public Page<User> findByEmailStartingWith(String name, Pageable pageable) {
 		return userRepository.findByEmailStartingWith(name, pageable);
 	}
-	
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userRepository.findByEmail(username)
+				.orElseThrow(() -> new UsernameNotFoundException(String.format("User [ %s ] not found.", username)));
+	}
+
 }

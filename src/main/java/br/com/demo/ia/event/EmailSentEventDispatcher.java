@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailSentEventDispatcher {
 	
-	private RabbitTemplate rabbitTemplate;
+	private final RabbitTemplate rabbitTemplate;
 	
-	private String exchange;
+	private final String exchange;
 	
-	private String topicRoutingKey;
+	private final String topicRoutingKey;
 
 	public EmailSentEventDispatcher(
 			

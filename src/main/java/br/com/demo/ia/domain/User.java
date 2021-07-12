@@ -1,11 +1,17 @@
 package br.com.demo.ia.domain;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,12 +20,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@SuppressWarnings("serial")
 @Entity
 @Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public final class User {
+public final class User implements UserDetails {
 	
 	@Id
 	@GeneratedValue
@@ -92,5 +99,17 @@ public final class User {
 		this.password = password;
 		this.admin = admin;
 	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		String role = getAdmin() != null && getAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
+		return List.of(new SimpleGrantedAuthority(role));
+	}
+
+	@Override public String getUsername() { return getEmail(); }
+	@Override public boolean isAccountNonExpired() { return true; }
+	@Override public boolean isAccountNonLocked() { return true; }
+	@Override public boolean isCredentialsNonExpired() { return true; }
+	@Override public boolean isEnabled() { return true;	}
 
 }

@@ -2,10 +2,11 @@ package br.com.demo.ia.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import br.com.demo.ia.domain.User;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
 	User save(User entity);
 	

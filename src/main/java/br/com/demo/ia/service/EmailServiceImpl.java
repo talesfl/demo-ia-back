@@ -12,9 +12,9 @@ import br.com.demo.ia.repository.EmailRepository;
 @Service
 class EmailServiceImpl implements EmailService {
 	
-	private EmailRepository emailRepository;
+	private final EmailRepository emailRepository;
 	
-	private EmailSentEventDispatcher emailSentEventDispatcher;
+	private final EmailSentEventDispatcher emailSentEventDispatcher;
 
 	public EmailServiceImpl(
 			final EmailRepository emailRepository,

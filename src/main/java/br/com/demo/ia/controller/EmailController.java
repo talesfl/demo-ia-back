@@ -18,7 +18,7 @@ import br.com.demo.ia.service.EmailService;
 @RequestMapping("emails")
 class EmailController {
 
-	private EmailService emailService;
+	private final EmailService emailService;
 
 	public EmailController(final EmailService emailService) {
 		this.emailService = emailService;
