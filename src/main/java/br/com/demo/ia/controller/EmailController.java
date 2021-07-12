@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.demo.ia.domain.Email;
+import br.com.demo.ia.dto.EmailDTO;
 import br.com.demo.ia.service.EmailService;
 
 @RestController
@@ -25,8 +26,8 @@ class EmailController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> dispatchEmail(@RequestBody final Email email) {
-		Email entity = emailService.save(email);
+	public ResponseEntity<Void> dispatchEmail(@RequestBody final EmailDTO email) {
+		Email entity = emailService.save(email.toEntity());
 		emailService.dispatchEmail(entity);
 		return ResponseEntity.noContent().build();
 	}
@@ -37,12 +38,12 @@ class EmailController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<Email>> findByUserFromId(
+	public ResponseEntity<Page<EmailDTO>> findByUserFromId(
 			@RequestParam final Long id,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
 	) {
 		Page<Email> page = emailService.findByUserFromId(id, PageRequest.of(pageNumber, pageSize));
-		return ResponseEntity.ok(page);
+		return ResponseEntity.ok(page.map(EmailDTO::new));
 	}
 }

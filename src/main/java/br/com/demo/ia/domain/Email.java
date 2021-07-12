@@ -51,8 +51,7 @@ public final class Email {
 			User userFrom, 
 			User userTo, 
 			String subject, 
-			String content, 
-			LocalDateTime createDate
+			String content
 	) {
 		this.id = id;
 		this.userFrom = userFrom;
@@ -61,6 +60,5 @@ public final class Email {
 		this.content = content;
 		this.createDate = LocalDateTime.now();
 	}
-	
 	
 }
