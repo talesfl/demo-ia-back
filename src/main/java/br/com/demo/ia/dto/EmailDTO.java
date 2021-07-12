@@ -36,7 +36,7 @@ public class EmailDTO implements Serializable {
 			}
 			
 			if (entity.getUserTo() != null) {
-				this.userFrom = new UserDTO(entity.getUserTo());
+				this.userTo = new UserDTO(entity.getUserTo());
 			}
 			
 			this.subject = entity.getSubject();

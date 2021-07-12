@@ -3,6 +3,7 @@ package br.com.demo.ia.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.demo.ia.domain.Email;
 import br.com.demo.ia.event.EmailSentEvent;
@@ -35,7 +36,9 @@ class EmailServiceImpl implements EmailService {
 	}
 	
 	@Override
+	@Transactional
 	public void dispatchEmail(Email email) {
+		email = save(email);
 		emailSentEventDispatcher.send(new EmailSentEvent(email));
 	}
 

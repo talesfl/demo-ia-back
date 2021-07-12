@@ -27,8 +27,7 @@ class EmailController {
 	
 	@PostMapping
 	public ResponseEntity<Void> dispatchEmail(@RequestBody final EmailDTO email) {
-		Email entity = emailService.save(email.toEntity());
-		emailService.dispatchEmail(entity);
+		emailService.dispatchEmail(email.toEntity());
 		return ResponseEntity.noContent().build();
 	}
 	
