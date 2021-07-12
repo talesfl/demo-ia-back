@@ -8,5 +8,10 @@
     "name": "demo_ia_back.topic.routing_key",
     "type": "java.lang.String",
     "description": "RabbitMQ topic routing key"
+  },
+  {
+    "name": "demo_ia_back.realm",
+    "type": "java.lang.String",
+    "description": "Realm to log in"
   }
 ]}

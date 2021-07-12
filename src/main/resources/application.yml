@@ -1,6 +1,5 @@
 spring:
   jpa:
-    
     hibernate:
       ddl-auto: update
       
@@ -19,6 +18,7 @@ server:
     context-path: /api/
     
 demo_ia_back:
+  realm: demo_ia_back
   exchange: demo_ia_back_exchange
   topic:
     routing_key: email_sent_event

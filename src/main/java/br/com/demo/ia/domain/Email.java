@@ -13,14 +13,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
-@RequiredArgsConstructor
+@NoArgsConstructor
 public final class Email {
 	
 	@Id
@@ -30,20 +30,37 @@ public final class Email {
 	
 	@ManyToOne
 	@JoinColumn(name = "USER_FROM_ID", nullable = false, updatable = false)
-	private final User userFrom;
-	
+	private User userFrom;
+
 	@ManyToOne
 	@JoinColumn(name = "USER_TO_ID", nullable = false, updatable = false)
-	private final User userTo;
-	
+	private User userTo;
+
 	@Column(nullable = false, updatable = false)
-	private final String subject;
-	
+	private String subject;
+
 	@Column(updatable = false)
-	private final String content;
+	private String content;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime createDate = LocalDateTime.now();
+	
+	public Email(
+			Long id, 
+			User userFrom, 
+			User userTo, 
+			String subject, 
+			String content, 
+			LocalDateTime createDate
+	) {
+		this.id = id;
+		this.userFrom = userFrom;
+		this.userTo = userTo;
+		this.subject = subject;
+		this.content = content;
+		this.createDate = LocalDateTime.now();
+	}
+	
 	
 }

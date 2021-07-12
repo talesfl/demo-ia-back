@@ -56,14 +56,15 @@ public final class User implements UserDetails {
 	@Column(nullable = false)
 	private Boolean admin;
 	
-
 	public User(
+			Long id,
 			String name, 
 			String login, 
 			String password, 
 			String email, 
 			Boolean admin
 	) {
+		this.id = id;
 		this.name = name;
 		this.login = login;
 		this.password = password;
@@ -72,7 +73,6 @@ public final class User implements UserDetails {
 		this.email = email;
 		this.admin = admin;
 	}
-	
 	
 	public User(
 			Long id,
@@ -87,19 +87,6 @@ public final class User implements UserDetails {
 		this.email = email;
 	}
 	
-	public User(
-			Long id,
-			String name, 
-			String login, 
-			String password, 
-			String email, 
-			Boolean admin
-	) {
-		this(id, name, login, email);
-		this.password = password;
-		this.admin = admin;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = getAdmin() != null && getAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
