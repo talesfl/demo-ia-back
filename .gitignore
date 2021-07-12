@@ -34,3 +34,4 @@ build/
 
 ### H2 DB ###
 *.lock.db
+*.trace.db

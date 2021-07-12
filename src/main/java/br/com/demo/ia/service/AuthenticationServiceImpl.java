@@ -15,7 +15,9 @@ class AuthenticationServiceImpl implements AuthenticationService {
 	
 	private final UserService userService;
 
-	public AuthenticationServiceImpl(final UserService userService) {
+	public AuthenticationServiceImpl(
+			final UserService userService
+	) {
 		this.userService = userService;
 	}
 
@@ -24,10 +26,13 @@ class AuthenticationServiceImpl implements AuthenticationService {
 		
 		UserDetails userDetails = userService.loadUserByUsername(user.getEmail());
 		
-		SecurityContext context = SecurityContextHolder.createEmptyContext();
-		Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), userDetails.getAuthorities());
+		SecurityContext context = SecurityContextHolder.getContext();
+		Authentication authentication = new UsernamePasswordAuthenticationToken(
+				user.getEmail(), 
+				user.getPassword(), 
+				userDetails.getAuthorities()
+		);
 		context.setAuthentication(authentication);
-		SecurityContextHolder.setContext(context);
 		
 		return (User) userDetails;
 	}
@@ -36,5 +41,5 @@ class AuthenticationServiceImpl implements AuthenticationService {
 	public void logout() {
 		SecurityContextHolder.clearContext();
 	}
-	
+
 }
