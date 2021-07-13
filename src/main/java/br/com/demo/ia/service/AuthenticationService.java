@@ -2,11 +2,11 @@ package br.com.demo.ia.service;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import br.com.demo.ia.domain.User;
+import br.com.demo.ia.dto.UserDTO;
 
 public interface AuthenticationService {
 
-	User login(User user) throws UsernameNotFoundException;
+	UserDTO login(UserDTO user) throws UsernameNotFoundException;
 
 	void logout();
 }

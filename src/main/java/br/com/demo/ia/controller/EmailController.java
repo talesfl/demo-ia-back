@@ -32,8 +32,8 @@ class EmailController {
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Email> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(emailService.findById(id));
+	public ResponseEntity<EmailDTO> findById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(new EmailDTO(emailService.findById(id)));
 	}
 	
 	@GetMapping

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.demo.ia.domain.User;
 import lombok.EqualsAndHashCode;
@@ -46,5 +47,10 @@ public class UserDTO implements Serializable {
 	
 	public User toEntity() {
 		 return new User(id, name, login, password, email, admin);
+	}
+	
+	@JsonIgnore
+	public String getPassword() {
+		return password;
 	}
 }
