@@ -99,7 +99,7 @@ public final class User implements UserDetails {
 		return List.of(new SimpleGrantedAuthority(role));
 	}
 	
-	@Override @JsonIgnore public String getPassword() { return password; }
+	@Override public String getPassword() { return password; }
 	@Override @JsonIgnore public String getUsername() { return getEmail(); }
 	@Override @JsonIgnore public boolean isAccountNonExpired() { return true; }
 	@Override @JsonIgnore public boolean isAccountNonLocked() { return true; }
