@@ -18,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Entity
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
@@ -78,13 +80,15 @@ public final class User implements UserDetails {
 			Long id,
 			String name, 
 			String login, 
-			String email
+			String email,
+			Boolean admin
 	) {
 		this.id = id;
 		this.name = name;
 		this.login = login;
 		this.updateDate = LocalDateTime.now();
 		this.email = email;
+		this.admin = admin;
 	}
 	
 	@Override

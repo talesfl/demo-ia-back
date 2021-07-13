@@ -1,5 +1,7 @@
 package br.com.demo.ia.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,17 +27,15 @@ class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User entity) {
+		User user = userRepository.findById(entity.getId()).orElseThrow();
 		
-		// TODO: quando for implentar a sessão, fazer a checagem na
-		// mesma para saber e o usuário logado é admin ou não.
-		// Dependendo disso deve ser chamado o construtor apropriado
+		user.setAdmin(entity.getAdmin());
+		user.setEmail(entity.getEmail());
+		user.setLogin(entity.getLogin());
+		user.setName(entity.getName());
+		user.setUpdateDate(LocalDateTime.now());
 		
-		return userRepository.save(new User(
-				entity.getId(),
-				entity.getName(),
-				entity.getLogin(),
-				entity.getEmail()
-			));
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -62,6 +62,20 @@ class UserServiceImpl implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByEmail(username)
 				.orElseThrow(() -> new UsernameNotFoundException(String.format("User [ %s ] not found.", username)));
+	}
+
+	@Override
+	public void updatePassword(Long id, String password) {
+		User user = userRepository.findById(id).orElseThrow();
+		
+		if (password == null || password.isEmpty() || password.isBlank()) {
+			throw new IllegalArgumentException();
+		}
+		
+		user.setPassword(password);
+		user.setUpdateDate(LocalDateTime.now());
+		
+		userRepository.save(user);
 	}
 
 }

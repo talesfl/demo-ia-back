@@ -20,4 +20,6 @@ public interface UserService extends UserDetailsService {
 	
 	Page<User> findByEmailStartingWith(String name, Pageable pageable);
 	
+	void updatePassword(Long id, String password);
+	
 }

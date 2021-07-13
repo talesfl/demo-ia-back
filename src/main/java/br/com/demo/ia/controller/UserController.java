@@ -67,5 +67,11 @@ class UserController {
 		Page<User> page = userService.findByEmailStartingWith(email, PageRequest.of(pageNumber, pageSize));
 		return ResponseEntity.ok(page.map(UserDTO::new));
 	}
+	
+	@PutMapping("password")
+	public ResponseEntity<Void> updatePassword(@RequestBody final UserDTO user) {
+		userService.updatePassword(user.getId(), user.getPassword());
+		return ResponseEntity.noContent().build();
+	}
 
 }
