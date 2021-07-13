@@ -1,6 +1,7 @@
 package br.com.demo.ia.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,6 +36,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
+				.antMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/api/users/password").hasRole("ADMIN")
 					.anyRequest().authenticated()
 				.and()
 					.httpBasic()
@@ -46,5 +49,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
+	
 }
