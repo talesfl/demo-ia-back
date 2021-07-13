@@ -2,10 +2,13 @@ package br.com.demo.ia.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.demo.ia.domain.User;
@@ -22,6 +25,14 @@ class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User entity) {
+		
+		LocalDateTime now = LocalDateTime.now();
+		
+		entity.setCreateDate(now);
+		entity.setUpdateDate(now);
+		String randomPwd = String.valueOf(Math.random() * 1000);
+		entity.setPassword(passwordEncoder().encode(randomPwd));
+		
 		return userRepository.save(entity);
 	}
 
@@ -69,13 +80,17 @@ class UserServiceImpl implements UserService {
 		User user = userRepository.findById(id).orElseThrow();
 		
 		if (password == null || password.isEmpty() || password.isBlank()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Password is null.");
 		}
 		
-		user.setPassword(password);
+		user.setPassword(passwordEncoder().encode(password));
 		user.setUpdateDate(LocalDateTime.now());
 		
 		userRepository.save(user);
 	}
-
+	
+	@Bean
+	private PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }
