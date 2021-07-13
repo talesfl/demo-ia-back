@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.demo.ia.domain.User;
-import br.com.demo.ia.dto.UserDTO;
 import br.com.demo.ia.service.UserService;
 
 @RestController
@@ -28,18 +27,18 @@ class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> save(@RequestBody final UserDTO user) {
-		return ResponseEntity.ok(new UserDTO(userService.save(user.toEntity())));
+	public ResponseEntity<User> save(@RequestBody final User user) {
+		return ResponseEntity.ok(userService.save(user));
 	}
 	
 	@PutMapping
-	public ResponseEntity<UserDTO> update(@RequestBody final UserDTO user) {
-		return ResponseEntity.ok(new UserDTO(userService.update(user.toEntity())));
+	public ResponseEntity<User> update(@RequestBody final User user) {
+		return ResponseEntity.ok(userService.update(user));
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<UserDTO> findById(@PathVariable("id") final Long id) {
-		return ResponseEntity.ok(new UserDTO(userService.findById(id)));
+	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
+		return ResponseEntity.ok(userService.findById(id));
 	}
 	
 	@DeleteMapping("{id}")
@@ -49,27 +48,27 @@ class UserController {
 	}
 	
 	@GetMapping("name")
-	public ResponseEntity<Page<UserDTO>> findByNameStartingWith(
+	public ResponseEntity<Page<User>> findByNameStartingWith(
 			@RequestParam final String name,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
 	) {
 		Page<User> page = userService.findByNameStartingWith(name, PageRequest.of(pageNumber, pageSize));
-		return ResponseEntity.ok(page.map(UserDTO::new));
+		return ResponseEntity.ok(page);
 	}
 	
 	@GetMapping("email")
-	public ResponseEntity<Page<UserDTO>> findByEmailStartingWith(
+	public ResponseEntity<Page<User>> findByEmailStartingWith(
 			@RequestParam final String email,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
 	) {
 		Page<User> page = userService.findByEmailStartingWith(email, PageRequest.of(pageNumber, pageSize));
-		return ResponseEntity.ok(page.map(UserDTO::new));
+		return ResponseEntity.ok(page);
 	}
 	
 	@PutMapping("password")
-	public ResponseEntity<Void> updatePassword(@RequestBody final UserDTO user) {
+	public ResponseEntity<Void> updatePassword(@RequestBody final User user) {
 		userService.updatePassword(user.getId(), user.getPassword());
 		return ResponseEntity.noContent().build();
 	}

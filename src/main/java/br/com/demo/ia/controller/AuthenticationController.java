@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.demo.ia.dto.UserDTO;
+import br.com.demo.ia.domain.User;
 import br.com.demo.ia.service.AuthenticationService;
 
 @RestController
@@ -21,7 +21,7 @@ class AuthenticationController {
 	}
 
 	@PostMapping("login")
-	public ResponseEntity<UserDTO> login(@RequestBody UserDTO user) {
+	public ResponseEntity<User> login(@RequestBody User user) {
 		return ResponseEntity.ok(authenticationService.login(user));
 	}
 

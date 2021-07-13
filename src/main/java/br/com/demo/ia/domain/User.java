@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -92,15 +93,17 @@ public final class User implements UserDetails {
 	}
 	
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = getAdmin() != null && getAdmin() ? "ROLE_ADMIN" : "ROLE_USER";
 		return List.of(new SimpleGrantedAuthority(role));
 	}
-
-	@Override public String getUsername() { return getEmail(); }
-	@Override public boolean isAccountNonExpired() { return true; }
-	@Override public boolean isAccountNonLocked() { return true; }
-	@Override public boolean isCredentialsNonExpired() { return true; }
-	@Override public boolean isEnabled() { return true;	}
+	
+	@Override @JsonIgnore public String getPassword() { return password; }
+	@Override @JsonIgnore public String getUsername() { return getEmail(); }
+	@Override @JsonIgnore public boolean isAccountNonExpired() { return true; }
+	@Override @JsonIgnore public boolean isAccountNonLocked() { return true; }
+	@Override @JsonIgnore public boolean isCredentialsNonExpired() { return true; }
+	@Override @JsonIgnore public boolean isEnabled() { return true;	}
 
 }
