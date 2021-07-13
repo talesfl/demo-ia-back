@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,6 +44,7 @@ public final class User implements UserDetails {
 	@Column(nullable = false)
 	private String login;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(nullable = false)
 	private String password;
 	
@@ -99,7 +102,6 @@ public final class User implements UserDetails {
 		return List.of(new SimpleGrantedAuthority(role));
 	}
 	
-	@Override public String getPassword() { return password; }
 	@Override @JsonIgnore public String getUsername() { return getEmail(); }
 	@Override @JsonIgnore public boolean isAccountNonExpired() { return true; }
 	@Override @JsonIgnore public boolean isAccountNonLocked() { return true; }
