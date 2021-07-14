@@ -1,10 +1,12 @@
-package br.com.demo.ia.configuration;
+package br.com.demo.ia.configuration.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+
+import br.com.demo.ia.configuration.CommonBeansConfig;
 
 @Configuration
 public class RedisConfig {
@@ -22,4 +24,5 @@ public class RedisConfig {
 		
 		return stringRedisTemplate;
 	}
+
 }

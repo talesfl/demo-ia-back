@@ -29,11 +29,6 @@ spring:
     
   session:
     store-type: redis
-    redis:
-      flush-mode: on-save
-      namespace: spring:session
-        
-   
       
 server:
   servlet:
@@ -46,3 +41,5 @@ demo_ia_back:
     exchange: demo_ia_back_exchange
     topic:
       routing_key: email_sent_event
+      
+      
