@@ -5,7 +5,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import br.com.demo.ia.component.CommonBeansComponent;
-import br.com.demo.ia.domain.Email;
 
 @Component
 public class EmailSentEventHandler {
@@ -21,11 +20,11 @@ public class EmailSentEventHandler {
 	@RabbitListener(queues = "${demo_ia_back.rabbitMQ.queue}")
 	public void handleEmailSentEvent(final Message message) {
 		
-		Email email = (Email) commonBeansComponent.jackson2MessageConverter()
+		EmailSentEvent event = (EmailSentEvent) commonBeansComponent.jackson2MessageConverter()
 			.fromMessage(message, EmailSentEvent.class);
 		
 		System.out.println("=======================");
-		System.out.println(email);
+		System.out.println(event);
 		System.out.println("=======================");
 	}	
 }
