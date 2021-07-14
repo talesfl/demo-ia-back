@@ -23,14 +23,14 @@ public class RabbitMQConfiguration {
 
 	@Bean
 	public TopicExchange exchange(
-		@Value("${demo_ia_back.rabbitMQ.exchange}") final String exchangeName
+		@Value("${demo_ia_back.rabbitmq.exchange}") final String exchangeName
 	) {
 		return new TopicExchange(exchangeName);
 	}
 	
 	@Bean
 	public Queue queue(
-		@Value("${demo_ia_back.rabbitMQ.queue}") 
+		@Value("${demo_ia_back.rabbitmq.queue}") 
 		final String queueName
 	) {
 		return new Queue(queueName, true);
@@ -42,7 +42,7 @@ public class RabbitMQConfiguration {
 		
 		final TopicExchange exchange,
 		
-		@Value("${demo_ia_back.rabbitMQ.topic.routing_key}")
+		@Value("${demo_ia_back.rabbitmq.topic.routing_key}")
 		final String routingKey
 	) {
 		return BindingBuilder.bind(queue).to(exchange).with(routingKey);

@@ -41,7 +41,7 @@ class EmailController {
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
 	) {
-		Page<Email> page = emailService.findByUserFromId(id, PageRequest.of(pageNumber, pageSize));
+		Page<Email> page = emailService.findByUserId(id, PageRequest.of(pageNumber, pageSize));
 		return ResponseEntity.ok(page);
 	}
 }

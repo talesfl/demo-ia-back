@@ -13,5 +13,5 @@ public interface EmailService {
 	
 	void dispatchEmail(Email email);
 
-	Page<Email> findByUserFromId(Long id, Pageable pageable);
+	Page<Email> findByUserId(Long id, Pageable pageable);
 }

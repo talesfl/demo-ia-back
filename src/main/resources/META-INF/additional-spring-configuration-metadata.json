@@ -1,16 +1,16 @@
 {"properties": [
   {
-    "name": "demo_ia_back.rabbitMQ.exchange",
+    "name": "demo_ia_back.rabbitmq.exchange",
     "type": "java.lang.String",
     "description": "RabbitMQ exchange name"
   },
   {
-    "name": "demo_ia_back.rabbitMQ.topic.routing_key",
+    "name": "demo_ia_back.rabbitmq.topic.routing_key",
     "type": "java.lang.String",
     "description": "RabbitMQ topic routing key"
   },
   {
-    "name": "demo_ia_back.rabbitMQ.queue",
+    "name": "demo_ia_back.rabbitmq.queue",
     "type": "java.lang.String",
     "description": "RabbitMQ queue name"
   },

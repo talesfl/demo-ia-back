@@ -43,8 +43,8 @@ class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public Page<Email> findByUserFromId(Long id, Pageable pageable) {
-		return emailRepository.findByUserFromId(id, pageable);
+	public Page<Email> findByUserId(Long id, Pageable pageable) {
+		return emailRepository.findByUserFromIdOrUserToId(id, id, pageable);
 	}
 
 }

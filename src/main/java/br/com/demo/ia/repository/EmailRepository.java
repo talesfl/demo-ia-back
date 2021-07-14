@@ -9,5 +9,5 @@ import br.com.demo.ia.domain.Email;
 
 public interface EmailRepository extends JpaRepository<Email, Long> {
 	
-	Page<Email> findByUserFromId(@Param("id") Long id,  final Pageable pageable);
+	Page<Email> findByUserFromIdOrUserToId(@Param("id") Long fromId, @Param("id") Long toId, final Pageable pageable);
 }

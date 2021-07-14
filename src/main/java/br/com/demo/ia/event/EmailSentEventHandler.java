@@ -17,7 +17,7 @@ public class EmailSentEventHandler {
 		this.commonBeansComponent = commonBeansComponent;
 	}
 	
-	@RabbitListener(queues = "${demo_ia_back.rabbitMQ.queue}")
+	@RabbitListener(queues = "${demo_ia_back.rabbitmq.queue}")
 	public void handleEmailSentEvent(final Message message) {
 		
 		EmailSentEvent event = (EmailSentEvent) commonBeansComponent.jackson2MessageConverter()

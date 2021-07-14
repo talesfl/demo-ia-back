@@ -15,6 +15,11 @@ spring:
   
   datasource:
     url: jdbc:h2:file:./demo-ia-db;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
       
 server:
   servlet:
@@ -22,7 +27,7 @@ server:
     
 demo_ia_back:
   realm: demo_ia_back
-  rabbitMQ:
+  rabbitmq:
     queue: demo_ia_back_queue
     exchange: demo_ia_back_exchange
     topic:

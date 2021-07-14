@@ -17,10 +17,10 @@ public class EmailSentEventDispatcher {
 			
 			final RabbitTemplate rabbitTemplate,
 			
-			@Value("${demo_ia_back.rabbitMQ.exchange}")
+			@Value("${demo_ia_back.rabbitmq.exchange}")
 			final String exchange, 
 			
-			@Value("${demo_ia_back.rabbitMQ.topic.routing_key}")
+			@Value("${demo_ia_back.rabbitmq.topic.routing_key}")
 			final String topicRoutingKey
 	) {
 		
