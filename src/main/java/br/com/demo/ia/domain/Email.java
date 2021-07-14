@@ -1,5 +1,6 @@
 package br.com.demo.ia.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -16,12 +17,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@SuppressWarnings("serial")
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity
 @NoArgsConstructor
-public final class Email {
+public final class Email implements Serializable {
 	
 	@Id
 	@GeneratedValue

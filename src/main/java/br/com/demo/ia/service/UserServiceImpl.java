@@ -2,15 +2,13 @@ package br.com.demo.ia.service;
 
 import java.time.LocalDateTime;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.demo.ia.component.CommonBeansComponent;
 import br.com.demo.ia.domain.User;
 import br.com.demo.ia.repository.UserRepository;
 
@@ -18,9 +16,15 @@ import br.com.demo.ia.repository.UserRepository;
 class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
+	
+	private final CommonBeansComponent commonBeansComponent;
 
-	public UserServiceImpl(final UserRepository userRepository) {
+	public UserServiceImpl(
+			final UserRepository userRepository,
+			final CommonBeansComponent commonBeansComponent
+	) {
 		this.userRepository = userRepository;
+		this.commonBeansComponent = commonBeansComponent;
 	}
 
 	@Override
@@ -31,7 +35,7 @@ class UserServiceImpl implements UserService {
 		entity.setCreateDate(now);
 		entity.setUpdateDate(now);
 		String randomPwd = String.valueOf(Math.random() * 1000);
-		entity.setPassword(passwordEncoder().encode(randomPwd));
+		entity.setPassword(commonBeansComponent.passwordEncoder().encode(randomPwd));
 		
 		return userRepository.save(entity);
 	}
@@ -83,14 +87,10 @@ class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException("Password is null.");
 		}
 		
-		user.setPassword(passwordEncoder().encode(password));
+		user.setPassword(commonBeansComponent.passwordEncoder().encode(password));
 		user.setUpdateDate(LocalDateTime.now());
 		
 		userRepository.save(user);
 	}
-	
-	@Bean
-	private PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
 }

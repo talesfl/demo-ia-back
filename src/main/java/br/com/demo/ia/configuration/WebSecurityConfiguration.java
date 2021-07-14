@@ -7,8 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import br.com.demo.ia.component.CommonBeansComponent;
 import br.com.demo.ia.service.UserService;
 
 @EnableWebSecurity
@@ -17,9 +17,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private final UserService userService;
 	
 	private final String realm;
+	
+	private final CommonBeansComponent commonBeansComponent;
 
 	public WebSecurityConfiguration(
-			
+			final CommonBeansComponent commonBeansComponent,
 			final UserService userService,
 			
 			@Value("${demo_ia_back.realm}")
@@ -27,6 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	) {
 		this.userService = userService;
 		this.realm = realm;
+		this.commonBeansComponent = commonBeansComponent;
 	}
 
 	@Override
@@ -47,7 +50,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(userService)
+			.passwordEncoder(commonBeansComponent.passwordEncoder());
 	}
 	
 }

@@ -22,6 +22,8 @@ server:
     
 demo_ia_back:
   realm: demo_ia_back
-  exchange: demo_ia_back_exchange
-  topic:
-    routing_key: email_sent_event
+  rabbitMQ:
+    queue: demo_ia_back_queue
+    exchange: demo_ia_back_exchange
+    topic:
+      routing_key: email_sent_event
