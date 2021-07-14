@@ -16,7 +16,7 @@ import lombok.ToString;
 public class EmailSentEvent implements Serializable {
 
 	private final Email email;
-	
+
 	public EmailSentEvent() {
 		this.email = null;
 	}
