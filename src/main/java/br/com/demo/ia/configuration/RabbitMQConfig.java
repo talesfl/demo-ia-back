@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.demo.ia.component.CommonBeansComponent;
-
 @Configuration
-public class RabbitMQConfiguration {
+public class RabbitMQConfig {
 	
-	private final CommonBeansComponent commonBeansComponent;
+	private final CommonBeansConfig commonBeansComponent;
 	
-	public RabbitMQConfiguration(CommonBeansComponent commonBeansComponent) {
+	public RabbitMQConfig(final CommonBeansConfig commonBeansComponent) {
 		this.commonBeansComponent = commonBeansComponent;
 	}
 

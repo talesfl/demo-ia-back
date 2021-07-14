@@ -6,22 +6,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 
-import br.com.demo.ia.component.CommonBeansComponent;
 import br.com.demo.ia.service.UserService;
 
 @EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final UserService userService;
 	
 	private final String realm;
 	
-	private final CommonBeansComponent commonBeansComponent;
+	private final CommonBeansConfig commonBeansComponent;
 
-	public WebSecurityConfiguration(
-			final CommonBeansComponent commonBeansComponent,
+	public WebSecurityConfig(
+			final CommonBeansConfig commonBeansComponent,
 			final UserService userService,
 			
 			@Value("${demo_ia_back.realm}")
@@ -34,17 +32,16 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-				.sessionManagement()
-					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.authorizeRequests()
+		http
+			.authorizeRequests(authorizeRequests -> {
+				authorizeRequests
+				.antMatchers(HttpMethod.POST, "/api/authentications/login").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT, "/api/users/password").hasRole("ADMIN")
-					.anyRequest().authenticated()
-				.and()
-					.httpBasic()
-						.realmName(realm);
+				.antMatchers("/api/**").authenticated();
+				
+			}).httpBasic()
+					.realmName(realm);
 
 	}
 

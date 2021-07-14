@@ -4,15 +4,15 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import br.com.demo.ia.component.CommonBeansComponent;
+import br.com.demo.ia.configuration.CommonBeansConfig;
 
 @Component
 public class EmailSentEventHandler {
 	
-	private final CommonBeansComponent commonBeansComponent;
+	private final CommonBeansConfig commonBeansComponent;
 
 	public EmailSentEventHandler(
-			final CommonBeansComponent commonBeansComponent
+			final CommonBeansConfig commonBeansComponent
 	) {
 		this.commonBeansComponent = commonBeansComponent;
 	}

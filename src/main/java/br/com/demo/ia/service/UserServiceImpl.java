@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import br.com.demo.ia.component.CommonBeansComponent;
+import br.com.demo.ia.configuration.CommonBeansConfig;
 import br.com.demo.ia.domain.User;
 import br.com.demo.ia.repository.UserRepository;
 
@@ -17,11 +17,11 @@ class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
 	
-	private final CommonBeansComponent commonBeansComponent;
+	private final CommonBeansConfig commonBeansComponent;
 
 	public UserServiceImpl(
 			final UserRepository userRepository,
-			final CommonBeansComponent commonBeansComponent
+			final CommonBeansConfig commonBeansComponent
 	) {
 		this.userRepository = userRepository;
 		this.commonBeansComponent = commonBeansComponent;
