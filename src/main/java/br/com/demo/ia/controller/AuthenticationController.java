@@ -16,17 +16,17 @@ class AuthenticationController {
 
 	private final AuthenticationService authenticationService;
 
-	public AuthenticationController(final AuthenticationService authenticationService) {
+	public  AuthenticationController(final AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
 
 	@PostMapping("login")
-	public ResponseEntity<User> login(@RequestBody User user) {
+	ResponseEntity<User> login(@RequestBody User user) {
 		return ResponseEntity.ok(authenticationService.login(user));
 	}
 
 	@GetMapping("logout")
-	public ResponseEntity<Void> logout() {
+	ResponseEntity<Void> logout() {
 		authenticationService.logout();
 		return ResponseEntity.noContent().build();
 	}

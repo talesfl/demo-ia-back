@@ -27,28 +27,28 @@ class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> save(@RequestBody final User user) {
+	ResponseEntity<User> save(@RequestBody final User user) {
 		return ResponseEntity.ok(userService.save(user));
 	}
 	
 	@PutMapping
-	public ResponseEntity<User> update(@RequestBody final User user) {
+	ResponseEntity<User> update(@RequestBody final User user) {
 		return ResponseEntity.ok(userService.update(user));
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<User> findById(@PathVariable("id") final Long id) {
+	ResponseEntity<User> findById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(userService.findById(id));
 	}
 	
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deleteById(@PathVariable("id") final Long id) {
+	ResponseEntity<Void> deleteById(@PathVariable("id") final Long id) {
 		userService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("name")
-	public ResponseEntity<Page<User>> findByNameStartingWith(
+	ResponseEntity<Page<User>> findByNameStartingWith(
 			@RequestParam final String name,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
@@ -58,7 +58,7 @@ class UserController {
 	}
 	
 	@GetMapping("email")
-	public ResponseEntity<Page<User>> findByEmailStartingWith(
+	ResponseEntity<Page<User>> findByEmailStartingWith(
 			@RequestParam final String email,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize
@@ -68,7 +68,7 @@ class UserController {
 	}
 	
 	@PutMapping("password")
-	public ResponseEntity<Void> updatePassword(@RequestBody final User user) {
+	ResponseEntity<Void> updatePassword(@RequestBody final User user) {
 		userService.updatePassword(user.getId(), user.getPassword());
 		return ResponseEntity.noContent().build();
 	}

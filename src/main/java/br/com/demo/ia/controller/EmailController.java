@@ -25,18 +25,18 @@ class EmailController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> dispatchEmail(@RequestBody final Email email) {
+	ResponseEntity<Void> dispatchEmail(@RequestBody final Email email) {
 		emailService.dispatchEmail(email);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Email> findById(@PathVariable("id") final Long id) {
+	ResponseEntity<Email> findById(@PathVariable("id") final Long id) {
 		return ResponseEntity.ok(emailService.findById(id));
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<Email>> findByUserFromId(
+	ResponseEntity<Page<Email>> findByUserFromId(
 			@RequestParam final Long id,
 			@RequestParam final int pageNumber, 
 			@RequestParam final int pageSize

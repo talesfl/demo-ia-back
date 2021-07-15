@@ -26,6 +26,13 @@ spring:
   redis:
     host: localhost
     port: 6379
+  
+  kafka:
+    client-id: kafka-api-consumer
+    consumer:
+      group-id: kafka-consumer
+      bootstrap-servers:
+      - localhost:9092
     
   session:
     store-type: redis
@@ -41,5 +48,8 @@ demo_ia_back:
     exchange: demo_ia_back_exchange
     topic:
       routing_key: email_sent_event
-      
+  kafka:
+    topic:
+      routing_key: email_sent_event_kafka
+      routing_key_admin: email_sent_event_kafka_admin
       

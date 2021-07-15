@@ -18,5 +18,15 @@
     "name": "demo_ia_back.realm",
     "type": "java.lang.String",
     "description": "Realm to log in"
+  },
+  {
+    "name": "demo_ia_back.kafka.topic.routing_key",
+    "type": "java.lang.String",
+    "description": "Kafka topic routing key"
+  },
+  {
+    "name": "demo_ia_back.kafka.topic.routing_key_admin",
+    "type": "java.lang.String",
+    "description": "Kafka topic routing key admin"
   }
 ]}
