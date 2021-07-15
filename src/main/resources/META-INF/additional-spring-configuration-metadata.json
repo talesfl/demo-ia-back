@@ -18,10 +18,5 @@
     "name": "demo_ia_back.realm",
     "type": "java.lang.String",
     "description": "Realm to log in"
-  },
-  {
-    "name": "demo_ia_back.jwt-secret",
-    "type": "java.lang.String",
-    "description": "Jwt sign secret"
   }
 ]}
