@@ -22,7 +22,8 @@ public class CommonBeansConfig implements BeanClassLoaderAware {
 		this.classLoader = classLoader;
 	}
 
-	private ObjectMapper objectMapper() {
+	@Bean
+	public ObjectMapper objectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		objectMapper.registerModule(new JavaTimeModule());
