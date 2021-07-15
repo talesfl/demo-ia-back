@@ -15,25 +15,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final UserService userService;
 	
+	private final CommonBeansConfig commonBeansComponent;
+	
 	private final String realm;
 	
-	private final CommonBeansConfig commonBeansComponent;
-
 	public WebSecurityConfig(
 			final CommonBeansConfig commonBeansComponent,
 			final UserService userService,
 			
 			@Value("${demo_ia_back.realm}")
-			final String realm
+			final String realm	
 	) {
-		this.userService = userService;
 		this.realm = realm;
+		this.userService = userService;
 		this.commonBeansComponent = commonBeansComponent;
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.cors()
+			.and()
+			.csrf()
+				.disable()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
 				.antMatchers(HttpMethod.PUT, "/api/users/password").hasRole("ADMIN")
@@ -42,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.httpBasic()
 				.realmName(realm);
-
 	}
 
 	@Override

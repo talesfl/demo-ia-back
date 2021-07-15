@@ -35,6 +35,7 @@ server:
     context-path: /api/
     
 demo_ia_back:
+  jwt-secret: #345567&&*(fg_)
   realm: demo_ia_back
   rabbitmq:
     queue: demo_ia_back_queue
