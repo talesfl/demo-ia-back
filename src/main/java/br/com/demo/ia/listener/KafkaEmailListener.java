@@ -23,12 +23,14 @@ class KafkaEmailListener {
 		this.commonBeansConfig = commonBeansConfig;
 	}
 
-
 	@KafkaListener(
 		topics = "${demo_ia_back.kafka.topic.routing_key_admin}", 
 		groupId = "${spring.kafka.consumer.group-id}"
 	)
-	public void emailAdminListener(String message) { handleMessage(message); }
+	public void emailAdminListener(String message) { 
+		// TODO: buscar todos os admins e salvar o e-mail para cada um.
+		// handleMessage(message); 
+	}
 	
 	@KafkaListener(
 		topics = "${demo_ia_back.kafka.topic.routing_key}",
